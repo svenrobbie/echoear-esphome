@@ -1,6 +1,15 @@
-## 📦 Voice Assistant Devices — Updated to `2026.2.0`
+## 📦 Voice Assistant Devices — Updated to `2026.3.0`
 
-Supported devices:
+* Guition **1.80 v1**
+* Guition **1.80 v2**
+* Ball **v2**
+* Waveshare **1.85C v1**
+* Waveshare **1.85C v2**
+* Waveshare Audio Board
+* Breadboard DIY **(240×320)**
+
+
+## 📦 Voice Assistant Devices — Updated to `2026.2.0`
 
 * Guition **1.80 v1**
 * Guition **1.80 v2**

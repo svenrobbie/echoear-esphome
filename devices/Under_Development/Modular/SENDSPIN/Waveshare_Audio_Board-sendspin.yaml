@@ -1,28 +1,25 @@
 substitutions:
-  name: esphome-web-e9f624
-  friendly_name: Xiaozhi Taichi Pi v1
+  name: esphome-web-6ee470
+  friendly_name: "Waveshare Audio Board"
 
-## Modular version Main SENDSPIN edition 2026.3.0
+## Modular SENDSPIN version Main 2026.3.0
 
 ## SETTINGS ######################################################################################################################################
 
-  display_model: "JC3636W518"
-  pdm_mic_type: "false"
+  imagewidth:  "128"
+  imageheight: "64"
 
-  imagewidth:  "360"
-  imageheight: "360"
-
-  screenwidth:  "360"
-  screenheight: "360"
-  rotate_display: "180"
+  screenwidth:  "128"
+  screenheight: "64"  
+  rotate_display: "0"
 
   startup_sound: "Home_Connected" # (options are: available, Home_Connected, Home_Connected_Male, Computer_Ready)
   wakeup_sound: "popup" # (options are: popup, wake_word_triggered)
-  clock_background_image: "chip" # (options are: clock, hacker, mission, starrysky, waves, tron, chip, waterdrops)
-  imagemodel: "Gwen" # options are:
+  clock_background_image: "clock" # (options are: clock, hacker, ha-girl, mission, starrysky, waves, tron)
+  imagemodel: "Eyes" # options are:
 
-# AlbertQuackmore, Alita, Alfred, Astrobot, Buzz, Casita, Cybergirl, Dory, EVE, Eyes, Eyes2, GLaDOS, Girl1, Guy1, Guy2, Gwen, HA-character, ha-girl, Hacker, Harley,
-# Jarvis, Luffy, Mario, Max, Prime, Robochibi, Robocop, Robot, Robotgirl, Salem, Sarah, Shaun
+# Alita, Alfred, Astrobot, Buzz, Casita, Cybergirl, Dory, EVE, Eyes, Eyes2, GLaDOS, Girl1, Guy1, Guy2, Gwen, HA-character, ha-girl, Hacker, Harley,
+# Jarvis, Luffy, Mario, Max, Prime, Robochibi, Robocop, Robot, Robotgirl, Sarah, Shaun
 
 # USE ONLINE OR LOCAL MODEL AND WALLPAPER IMAGES, IMAGES SHOULD BE PLACED IN: homeassistant/www/images/
   imagepath: "https://github.com/RealDeco/xiaozhi-esphome/raw/main/images"
@@ -58,7 +55,7 @@ substitutions:
   font_family: Figtree
 
 esp32:
-  variant: ESP32S3
+  variant: esp32s3
   flash_size: 16MB
   cpu_frequency: 240MHz
   framework:
@@ -86,16 +83,13 @@ packages:
     ref: main
     refresh: 0s
     files:
-      - devices/Under_Development/Modular/HW/guition_180v1-sendspin_hw.yaml
+      - devices/Under_Development/Modular/HW/waveshare-s3-audio-board-sendspin.hw.yaml
 
 ### USE LOCAL MODULES (read description https://github.com/RealDeco/xiaozhi-esphome/blob/main/devices/Under_Development/Modular/README.md) #######
 
 #packages: # Local
 #  core: !include localtest/core-sendspin.yaml
-#  hw:   !include localtest/HW/guition_180v1-sendspin_hw.yaml
-
-#logger:
-#  level: debug
+#  hw:   !include localtest/HW/waveshare-s3-audio-board-sendspin.hw.yaml
 
 ## ENABLE / DISABLE WAKE WORDS ## IF LOW ON MEMORY, USE LESS WAKE WORDS ##########################################################################
 
