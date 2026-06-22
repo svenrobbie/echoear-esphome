@@ -102,7 +102,7 @@ micro_wake_word:
     - hey_jarvis
     - alexa
 #    - hey_mycroft
-    - model: https://github.com/svenrobbie/echoear-esphome/refs/heads/main/MicroWakeWords/models/v2/hey_sarah.json
+    - model: https://github.com/RealDeco/echoear-esphome/refs/heads/main/MicroWakeWords/models/v2/hey_sarah.json
 #    - model: https://raw.githubusercontent.com/JohnnyPrimus/Custom_V2_MicroWakeWords/refs/heads/main/models/computer/computer.json
 #    - model: https://raw.githubusercontent.com/JohnnyPrimus/Custom_V2_MicroWakeWords/refs/heads/main/models/hey_friday/hey_friday.json
 #    - model: https://github.com/kahrendt/microWakeWord/releases/download/okay_nabu_20241226.3/okay_nabu.json
