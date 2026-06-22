@@ -52,6 +52,7 @@ esphome:
 
 ota:
   - platform: esphome
+    password: !secret echoear_ota_key
     id: ota_esphome
 
 logger:
@@ -61,7 +62,7 @@ wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
   ap:
-    password: "RZ7D3EzJdPM6"
+    password: !secret echoear_ap_password
   on_connect:
     - component.update: clock_background
     - script.execute: draw_display
@@ -99,6 +100,8 @@ time:
                 - component.update: main_display
 
 api:
+  encryption:
+    key: !secret echoear_api_key
   on_client_connected:
     - script.execute: draw_display
     - script.execute: stop_wake_word

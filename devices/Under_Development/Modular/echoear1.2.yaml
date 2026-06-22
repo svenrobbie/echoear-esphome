@@ -21,7 +21,7 @@ substitutions:
 # Jarvis, Luffy, Mario, Max, Prime, Robochibi, Robocop, Robot, Robotgirl, Sarah, Shaun
 
 # USE ONLINE OR LOCAL MODEL AND WALLPAPER IMAGES, IMAGES SHOULD BE PLACED IN: homeassistant/www/images/
-  imagepath: "https://github.com/RealDeco/xiaozhi-esphome/raw/main/images"
+  imagepath: "https://github.com/svenrobbie/echoear-esphome/raw/main/images"
 #  imagepath: "http://homeassistant.local:8123/local/images/"
 
 ## PRESENCE / MOTION SENSORS ########## IF NOT USING THESE LEAVE THEM ALONE, SCRIPT WILL BREAK WITHOUT ###########################################
@@ -75,19 +75,19 @@ psram:
 
 packages:
   core:
-    url: https://github.com/RealDeco/xiaozhi-esphome.git
+    url: https://github.com/svenrobbie/echoear-esphome.git
     ref: main
     refresh: 0s
     files:
       - devices/Under_Development/Modular/core.yaml
   hw:
-    url: https://github.com/RealDeco/xiaozhi-esphome.git
+    url: https://github.com/svenrobbie/echoear-esphome.git
     ref: main
     refresh: 0s
     files:
       - devices/Under_Development/Modular/HW/echoear_1.2_hw.yaml
 
-### USE LOCAL MODULES (read description https://github.com/RealDeco/xiaozhi-esphome/blob/main/devices/Under_Development/Modular/README.md) #######
+### USE LOCAL MODULES (read description https://github.com/svenrobbie/echoear-esphome/blob/main/devices/Under_Development/Modular/README.md) #######
 
 #packages: # Local
 #  core: !include localtest/core.yaml
@@ -102,7 +102,7 @@ micro_wake_word:
     - hey_jarvis
     - alexa
 #    - hey_mycroft
-#    - model: https://raw.githubusercontent.com/RealDeco/xiaozhi-esphome/refs/heads/main/MicroWakeWords/models/v2/hey_sarah.json
+    - model: https://github.com/svenrobbie/echoear-esphome/refs/heads/main/MicroWakeWords/models/v2/hey_sarah.json
 #    - model: https://raw.githubusercontent.com/JohnnyPrimus/Custom_V2_MicroWakeWords/refs/heads/main/models/computer/computer.json
 #    - model: https://raw.githubusercontent.com/JohnnyPrimus/Custom_V2_MicroWakeWords/refs/heads/main/models/hey_friday/hey_friday.json
 #    - model: https://github.com/kahrendt/microWakeWord/releases/download/okay_nabu_20241226.3/okay_nabu.json
