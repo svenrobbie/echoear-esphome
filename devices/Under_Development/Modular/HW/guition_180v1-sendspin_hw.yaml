@@ -1,24 +1,9 @@
-# Taichi Pi v1 hardware SENDSPIN edition 2026.3.0
+# Taichi Pi v1 hardware SENDSPIN edition
 # --- CLOCKS PACKAGE -----------------------------------------------------------
 packages:
   clocks: !include ../clocks-standard.yaml
 
 # --- SENDSPIN -----------------------------------------------------------------
-external_components:
-  - source:
-      # https://github.com/esphome/esphome/pull/14933
-      type: git
-      url: https://github.com/kahrendt/esphome
-      ref: 890e33f99af2c2ea15dc74c3ec4cf32d25203526
-    components: [const, media_source, sendspin, generic_image]
-  - source:
-      # https://github.com/esphome/esphome/pull/12429
-      type: git
-      url: https://github.com/esphome/esphome
-      ref: ff8ce89556748509d7ee8724e12d9d43d3c8c1e8
-    refresh: 0s
-    components: [http_request]
-
 globals:
   - id: sendspin_album_art_valid
     type: bool
@@ -33,11 +18,11 @@ globals:
 generic_image:
   - platform: sendspin
     id: sendspin_album_art
-    format: jpg
+    format: jpeg
     type: RGB565
     resize: 360x360
-    image_source: ALBUM
-    on_image_decoded:
+    source: ALBUM
+    on_image_display:
       - lambda: |-
           id(sendspin_album_art_valid) = true;
       - component.update: main_display
@@ -77,7 +62,9 @@ i2c:
 
 i2s_audio:
   - id: i2s_mic
-    i2s_lrclk_pin: GPIO45
+    i2s_lrclk_pin:
+      number: GPIO45
+      ignore_strapping_warning: true
     i2s_bclk_pin:  GPIO42
 
   - id: i2s_audio_bus
@@ -98,7 +85,9 @@ microphone:
   - platform: i2s_audio
     id: box_mic
     i2s_audio_id: i2s_mic
-    i2s_din_pin: GPIO46
+    i2s_din_pin:
+      number: GPIO46
+      ignore_strapping_warning: true
     adc_type: external
     channel: left
     pdm: ${pdm_mic_type}
@@ -113,6 +102,7 @@ speaker:
     dac_type: external
     channel: stereo
     sample_rate: 48000
+    buffer_duration: 100ms
 
   - platform: mixer
     id: mixing_speaker
@@ -133,13 +123,11 @@ speaker:
     id: media_resampling_speaker
     output_speaker: media_mixing_input
     sample_rate: 48000
+    bits_per_sample: 16
 
 sendspin:
   id: sendspin_hub
   task_stack_in_psram: false
-
-http_request:
-  buffer_size_rx: 2048  # Reduces CPU load when streaming audio
 
 audio_file:
   - id: ready_sound
@@ -152,12 +140,11 @@ audio_file:
 media_source:
   - platform: audio_file
     id: audio_file_announcement_source
-  - platform: http_request
+  - platform: audio_http
     id: http_announcement_source
-    buffer_size: 250000
-  - platform: http_request
+  - platform: audio_http
     id: http_media_source
-    buffer_size: 500000
+    buffer_size: 100000
   - platform: sendspin
     id: sendspin_media_source
 
@@ -509,6 +496,7 @@ display:
     id: main_display
     model: ${display_model}
     rotation: ${rotate_display}
+    data_rate: 40MHz
     update_interval: never
     dimensions:
         height: ${imageheight}

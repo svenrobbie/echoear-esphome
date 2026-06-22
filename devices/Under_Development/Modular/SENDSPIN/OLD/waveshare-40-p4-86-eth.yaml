@@ -1,25 +1,22 @@
 substitutions:
-  name: esphome-web-6ee470
-  friendly_name: "Waveshare Audio Board"
+  name: waveshare-40-p4-86-eth
+  friendly_name: Waveshare 4.0
 
-## Modular SENDSPIN version Main 2026.3.0
+## Modular version Main P4
 
 ## SETTINGS ######################################################################################################################################
 
-  imagewidth:  "128"
-  imageheight: "64"
+  imagewidth:  "720"
+  imageheight: "720"
 
-  screenwidth:  "128"
-  screenheight: "64"  
+  screenwidth:  "720"
+  screenheight: "720"
   rotate_display: "0"
 
-  startup_sound: "Home_Connected" # (options are: available, Home_Connected, Home_Connected_Male, Computer_Ready)
-  wakeup_sound: "popup" # (options are: popup, wake_word_triggered)
-  clock_background_image: "clock" # (options are: clock, hacker, ha-girl, mission, starrysky, waves, tron)
-  imagemodel: "Eyes" # options are:
-
-# Alita, Alfred, Astrobot, Buzz, Casita, Cybergirl, Dory, EVE, Eyes, Eyes2, GLaDOS, Girl1, Guy1, Guy2, Gwen, HA-character, ha-girl, Hacker, Harley,
-# Jarvis, Luffy, Mario, Max, Prime, Robochibi, Robocop, Robot, Robotgirl, Sarah, Shaun
+  startup_sound: "Home_Connected" # options are: available, Home_Connected, Home_Connected_Male, Computer_Ready
+  wakeup_sound: "popup" # options are: popup, wake_word_triggered
+  clock_background_image: "chip" # options are: clock, hacker, mission, starrysky, waves, tron, chip, waterdrops
+  imagemodel: "Gwen" # options are: Gwen, Luffy, Dory, HA-character, Hacker, Shaun
 
 # USE ONLINE OR LOCAL MODEL AND WALLPAPER IMAGES, IMAGES SHOULD BE PLACED IN: homeassistant/www/images/
   imagepath: "https://github.com/RealDeco/xiaozhi-esphome/raw/main/images"
@@ -47,6 +44,7 @@ substitutions:
   light5_entity: "switch.nedis_smart_plug_tasmota1"
   sensor5_label: "Hall"
 
+
   weather_entity: "weather.forecast_home"
 
 ##################################################################################################################################################
@@ -55,19 +53,37 @@ substitutions:
   font_family: Figtree
 
 esp32:
-  variant: esp32s3
-  flash_size: 16MB
-  cpu_frequency: 240MHz
+  board: esp32-p4-evboard
+  flash_size: 32Mb
+  cpu_frequency: 360MHz
   framework:
     type: esp-idf
+    advanced:
+      enable_idf_experimental_features: yes
+      ringbuf_in_iram: true
     sdkconfig_options:
-      CONFIG_ESP32S3_DEFAULT_CPU_FREQ_240: "y"
-      CONFIG_ESP32S3_DATA_CACHE_64KB: "y"
-      CONFIG_ESP32S3_DATA_CACHE_LINE_64B: "y"
+      CONFIG_SPIRAM_FETCH_INSTRUCTIONS: y
+      CONFIG_SPIRAM_RODATA: y
 
 psram:
-  mode: octal
-  speed: 80MHz
+  mode: hex
+  speed: 200MHz
+  ignore_not_found: false
+
+esp_ldo:
+  - channel: 3
+    voltage: 2.5V
+
+esp32_hosted:
+  active_high: true
+  variant: ESP32C6
+  reset_pin: GPIO54
+  cmd_pin: GPIO19
+  clk_pin: GPIO18
+  d0_pin: GPIO14
+  d1_pin: GPIO15
+  d2_pin: GPIO16
+  d3_pin: GPIO17
 
 ### USE MODULES FROM GITHUB (default) ############################################################################################################
 
@@ -83,13 +99,23 @@ packages:
     ref: main
     refresh: 0s
     files:
-      - devices/Under_Development/Modular/HW/waveshare-s3-audio-board-sendspin.hw.yaml
+      - devices/Under_Development/Modular/HW/waveshare-40-p4-86-eth-sendspin_hw.yaml
+  extcomp:
+    url: https://github.com/RealDeco/xiaozhi-esphome.git
+    ref: main
+    refresh: 0s
+    files:
+      - devices/Under_Development/Modular/HW/sendspin-external_components.yaml
 
 ### USE LOCAL MODULES (read description https://github.com/RealDeco/xiaozhi-esphome/blob/main/devices/Under_Development/Modular/README.md) #######
 
 #packages: # Local
 #  core: !include localtest/core-sendspin.yaml
-#  hw:   !include localtest/HW/waveshare-s3-audio-board-sendspin.hw.yaml
+#  hw:   !include localtest/HW/waveshare-40-p4-86-eth-sendspin_hw.yaml
+#  extcomp:   !include localtest/HW/sendspin-external_components.yaml
+
+#logger:
+#  level: info
 
 ## ENABLE / DISABLE WAKE WORDS ## IF LOW ON MEMORY, USE LESS WAKE WORDS ##########################################################################
 
@@ -98,7 +124,7 @@ micro_wake_word:
   models:
     - okay_nabu
     - hey_jarvis
-    - alexa
+#    - alexa
 #    - hey_mycroft
 #    - model: https://raw.githubusercontent.com/RealDeco/xiaozhi-esphome/refs/heads/main/MicroWakeWords/models/v2/hey_sarah.json
 #    - model: https://raw.githubusercontent.com/JohnnyPrimus/Custom_V2_MicroWakeWords/refs/heads/main/models/computer/computer.json
