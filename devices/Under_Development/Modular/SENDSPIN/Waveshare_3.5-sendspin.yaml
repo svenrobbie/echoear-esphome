@@ -1,16 +1,16 @@
 substitutions:
-  name: xingzhi-cube-183
-  friendly_name: xingzhi-cube-183
+  name: waveshare-35
+  friendly_name: Waveshare 3.5
 
-## Modular Sendspin version
+## Modular version Main SENDSPIN edition
 
 ## SETTINGS ######################################################################################################################################
 
-  imagewidth:  "284"
-  imageheight: "240"
+  imagewidth:  "320"
+  imageheight: "480"
 
-  screenwidth:  "284"
-  screenheight: "240"
+  screenwidth:  "320"
+  screenheight: "480"
   rotate_display: "0"
 
   startup_sound: "Home_Connected" # (options are: available, Home_Connected, Home_Connected_Male, Computer_Ready)
@@ -49,6 +49,7 @@ substitutions:
 
   weather_entity: "weather.forecast_home"
 
+
 ##################################################################################################################################################
 
   font_glyphsets: "GF_Latin_Core"
@@ -57,11 +58,11 @@ substitutions:
 esphome:
   name: ${name}
   friendly_name: ${friendly_name}
-  min_version: 2026.5.0
+  min_version: 2026.6.0
   name_add_mac_suffix: true
   project:
     name: realdeco.xiaozhi-esphome
-    version: "2026.5.0"
+    version: "2026.6.0"
 
 esp32:
   variant: ESP32S3
@@ -90,15 +91,15 @@ packages:
   core:
     url: https://github.com/RealDeco/xiaozhi-esphome.git
     ref: main
-    refresh: 0s
+    refresh: 1d
     files:
       - devices/Under_Development/Modular/core-sendspin.yaml
   hw:
     url: https://github.com/RealDeco/xiaozhi-esphome.git
     ref: main
-    refresh: 0s
+    refresh: 1d
     files:
-      - devices/Under_Development/Modular/HW/xingzhi-cube-1.83-2mic-sendspin_hw.yaml
+      - devices/Under_Development/Modular/HW/Waveshare-3.5-sendspin_hw.yaml
   extcomp:
     url: https://github.com/RealDeco/xiaozhi-esphome.git
     ref: main
@@ -110,12 +111,8 @@ packages:
 
 #packages: # Local
 #  core: !include localtest/core-sendspin.yaml
-#  hw:   !include localtest/HW/xingzhi-cube-1.83-2mic-sendspin_hw.yaml
+#  hw:   !include localtest/HW/Waveshare-3.5-sendspin_hw.yaml
 #  extcomp: !include localtest/HW/sendspin-external_components.yaml
-
-### Debug logging, Uncomment ONLY if debugging, defaults to WARN
-#logger:
-#  level: DEBUG
 
 ## ENABLE / DISABLE WAKE WORDS ## IF LOW ON MEMORY, USE LESS WAKE WORDS ##########################################################################
 
