@@ -90,16 +90,21 @@ api:
     key: !secret echoear_api_key
   on_client_connected:
     - script.execute: draw_display
-    - script.execute: stop_wake_word
-    - delay: 2000ms
-    - lambda: |-
-        if (!id(boot_sound_played)) {
-          id(boot_sound_played) = true;
-          if (id(startup_sound_switch).state) {
-            id(play_sound)->execute(true, id(ready_sound));
-          }
-        }
-    - script.execute: reset_screensaver
+    # Only for Home Assistant, log viewers (ESPHome Logs) also trigger this
+    - if:
+        condition:
+          lambda: 'return client_info.rfind("Home Assistant", 0) == 0;'
+        then:
+          - script.execute: stop_wake_word
+          - delay: 2000ms
+          - lambda: |-
+              if (!id(boot_sound_played)) {
+                id(boot_sound_played) = true;
+                if (id(startup_sound_switch).state) {
+                  id(play_sound)->execute(true, id(ready_sound));
+                }
+              }
+          - script.execute: reset_screensaver
   on_client_disconnected:
     - script.execute: draw_display
 
@@ -983,7 +988,7 @@ script:
   - id: play_sound
     parameters:
       priority: bool
-      sound_file: "audio::AudioFile*"
+      sound_file: "std::add_const_t<audio::AudioFile>*"
     then:
       - lambda: |-
           id(playing_internal_sound) = true;
@@ -995,7 +1000,7 @@ script:
               .perform();
           }
           if ((id(external_media_player).state != media_player::MediaPlayerState::MEDIA_PLAYER_STATE_ANNOUNCING) || priority) {
-            id(external_media_player)->play_file(sound_file, true, false);
+            id(external_media_player)->play_file(const_cast<audio::AudioFile*>(sound_file), true, false);
           }
 
   - id: reset_screensaver
