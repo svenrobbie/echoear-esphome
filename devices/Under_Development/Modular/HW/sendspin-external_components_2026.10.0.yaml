@@ -1,0 +1,4 @@
+### Duplex audio: https://github.com/esphome/esphome/pull/19959
+external_components:
+  - source: github://esphome/esphome@04d475970e1835ba79ace1e5303749aac833e191
+    components: [i2s_audio]
